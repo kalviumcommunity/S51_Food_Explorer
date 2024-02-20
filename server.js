@@ -1,9 +1,17 @@
 const express = require('express');
+require("dotenv").config()
+const mongoose = require('mongoose')
+const {Connect, isConnected} = require('./db');
+// const { connected } = require('process');
 const app = express();
 const port = 3000;
 
+Connect()
+
+
 app.get("/", (req, res) => {
-    const htmlResponse = "<h1><i>FOOD EXPLORER</i></h1>";
+    // console.log(connected)
+    const htmlResponse = `<h1><i>FOOD EXPLORER</i></h1><p>Database Connection Status: ${isConnected ? 'Connected' : 'Disconnected'}</p>`;
     res.send(htmlResponse);
 });
 
@@ -12,10 +20,15 @@ app.get("/ping", (req, res) => {
     res.send(htmlResponse);
 });
 
-if (require.main === module) {
-    app.listen(port, () => {
-        console.log(`Server running`);
-    });
-}
+mongoose.connection.once('open', ()=>{
+    console.log("connected to mongoDB")
+    if (require.main === module) {
+        app.listen(port, () => {
+            console.log(`Server running: ${port}`);
+        });
+    }
+})
+
+
 
 module.exports = app;
