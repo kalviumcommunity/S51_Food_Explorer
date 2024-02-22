@@ -5,8 +5,18 @@ const {Connect, isConnected} = require('./db');
 // const { connected } = require('process');
 const app = express();
 const port = 3000;
+const {getRouter, postRouter, patchRouter, deleteRouter} = require("./routes/routes")
+const bodyParser = require('body-parser');
+
 
 Connect()
+
+app.use(bodyParser.json())
+
+app.use("/", getRouter)
+app.use("/", postRouter)
+app.use("/", patchRouter)
+app.use("/", deleteRouter)
 
 
 app.get("/", (req, res) => {
@@ -26,9 +36,8 @@ mongoose.connection.once('open', ()=>{
         app.listen(port, () => {
             console.log(`Server running: ${port}`);
         });
+    }else{
+        console.log("error")
     }
 })
-
-
-
 module.exports = app;
