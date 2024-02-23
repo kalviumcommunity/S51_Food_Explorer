@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 
 const FoodSchema = new mongoose.Schema({
     FoodID: { type: String},
-    Name: {type: String, default : "Shaswath"},
-    Cuisine : {type: String, default : "Shaswath"},
+    Name: {type: String},
+    Cuisine : {type: String},
     Country: String,
     City : String,
     MainIngredients : String,

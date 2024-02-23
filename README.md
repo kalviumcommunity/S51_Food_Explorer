@@ -15,3 +15,4 @@ Food Explorer is a web application designed to help users explore and discover i
 - Share your food discoveries with friends and family on social media platforms.
 
 ## Deployment The project is currently deployed and accessible at [Food Explorer](https://foodexplorer-iqox.onrender.com/).
+## Frontend Deployment of this project is accessible at [Food Explorer Frontend](https://s51-foodexplorer.netlify.app/).
