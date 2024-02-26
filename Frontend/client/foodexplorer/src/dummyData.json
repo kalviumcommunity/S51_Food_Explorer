@@ -1,0 +1,12 @@
+[
+    {
+        "Name": "Butter Chicken",
+        "Country": "India",
+        "Cuisine": "Indian",
+        "MainIngredients": "Chicken, Butter, Tomato Sauce, Cream, Spices",
+        "City": "Delhi",
+        "Taste": "Rich, Creamy, Mildly Spiced",
+        "Type": "Curry",
+        "FoodID": "F012"
+    }
+]
