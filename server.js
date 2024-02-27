@@ -8,10 +8,11 @@ const cors = require('cors')
 const port = 3000;
 const {getRouter, postRouter, patchRouter, deleteRouter} = require("./routes/routes")
 const bodyParser = require('body-parser');
-
+const cors = require('cors')
 
 Connect()
 
+app.use(express.json())
 app.use(bodyParser.json())
 app.use(cors())
 
