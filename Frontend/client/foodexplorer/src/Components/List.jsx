@@ -45,21 +45,24 @@ function List(){
     return(
         <>
             <h1>Food Details</h1>
+            <div className="box">
             {data.map((item)=>{
                 return(
-                    <div className='main'>
-                        <h1 className='h1'>Food Details</h1>
-                        <p>Food ID : {item.FoodID}</p>
-                        <p>Name : {item.Name}</p>
-                        <p>Country : {item.Country}</p>
-                        <p>City : {item.City}</p>
-                        <p>Cuisine : {item.Cuisine}</p>
-                        <p>Main Ingredients : {item.MainIngredients}</p>
-                        <p>Type : {item.Type}</p>
-                        <p>Taste : {item.Taste}</p>
-                    </div>
+                    
+                        <div className='main'>
+                            <p>Food ID : {item.FoodID}</p>
+                            <p>Name : {item.Name}</p>
+                            <p>Country : {item.Country}</p>
+                            <p>City : {item.City}</p>
+                            <p>Cuisine : {item.Cuisine}</p>
+                            <p>Main Ingredients : {item.MainIngredients}</p>
+                            <p>Type : {item.Type}</p>
+                            <p>Taste : {item.Taste}</p>
+                        </div>
+                    
                 )
             })}
+            </div>
         </>
     )
 
