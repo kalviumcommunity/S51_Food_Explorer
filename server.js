@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const {Connect, isConnected} = require('./db');
 // const { connected } = require('process');
 const app = express();
+const cors = require('cors')
 const port = 3000;
 const {getRouter, postRouter, patchRouter, deleteRouter} = require("./routes/routes")
 const bodyParser = require('body-parser');
@@ -12,6 +13,7 @@ const bodyParser = require('body-parser');
 Connect()
 
 app.use(bodyParser.json())
+app.use(cors())
 
 app.use("/", getRouter)
 app.use("/", postRouter)
