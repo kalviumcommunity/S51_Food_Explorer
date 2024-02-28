@@ -26,6 +26,9 @@
 // export default List;
 
 import React, {useState, useEffect} from "react";
+import {Link} from 'react-router-dom'
+import './List.css'
+
 function List(){
     const[data, setdata] = useState([])
     useEffect(()=>{
@@ -44,7 +47,13 @@ function List(){
     }
     return(
         <>
-            <h1>Food Details</h1>
+            <h1><i>FOOD EXPLORER</i></h1> 
+            <h2><i>Embark on a Culinary Journey with Food Explorer: Where Every Bite Tells a Story!</i></h2>
+            <hr></hr>
+            <div className="head">
+                <h1>Food Details</h1>
+                <Link to='/insertData' className="link"><button>ADD</button></Link>
+            </div>
             <div className="box">
             {data.map((item)=>{
                 return(
