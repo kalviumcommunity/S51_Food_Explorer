@@ -3,15 +3,16 @@ const mongoose = require("mongoose");
 const FoodSchema = new mongoose.Schema({
     FoodID: { type: String},
     Name: {type: String},
-    Cuisine : {type: String},
     Country: String,
-    City : String,
+    Cuisine : {type: String},
     MainIngredients : String,
-    Type : String,
+    City : String,
     Taste : String,
+    Type : String,
+    
     
 },);
 
 
 
-module.exports = mongoose.model("foods", FoodSchema);
+module.exports = mongoose.model("food", FoodSchema);
