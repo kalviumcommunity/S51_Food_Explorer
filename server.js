@@ -8,7 +8,7 @@ const cors = require('cors')
 const port = 3000;
 const {getRouter, postRouter, patchRouter, deleteRouter} = require("./routes/routes")
 const bodyParser = require('body-parser');
-const cors = require('cors')
+// const cors = require('cors')
 
 Connect()
 
