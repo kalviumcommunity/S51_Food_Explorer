@@ -71,19 +71,20 @@ deleteRouter.delete('/delete/:foodId', async (req, res)=>{
     }
 })
 
-getFoodRouter.get('/get/:foodId', async (req, res)=>{
-    try{
-        const{ foodId } = req.params
+getFoodRouter.get('/get/:foodId', async (req, res) => {
+    try {
+        const { foodId } = req.params;
         const food = await Food.findOne({ FoodID: foodId });
         if (!food) {
-        return res.status(404).json({ error: 'Food not found' });
+            return res.status(404).json({ error: 'Food not found' });
         }
-        console.log(food)
-    }catch (err) {
+        console.log(food);
+        res.status(200).json(food);
+    } catch (err) {
         console.error('Error fetching food data:', err);
         res.status(500).json({ error: 'Something went wrong' });
-        }
-})
+    }
+});
 
 
 
@@ -93,4 +94,4 @@ getFoodRouter.get('/get/:foodId', async (req, res)=>{
 
 
 
-module.exports = {getRouter, postRouter, patchRouter, deleteRouter}
+module.exports = {getRouter, postRouter, patchRouter, deleteRouter, getFoodRouter}
