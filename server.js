@@ -6,7 +6,7 @@ const {Connect, isConnected} = require('./db');
 const app = express();
 const cors = require('cors')
 const port = 3000;
-const {getRouter, postRouter, patchRouter, deleteRouter} = require("./routes/routes")
+const {getRouter, postRouter, patchRouter, deleteRouter, getFoodRouter} = require("./routes/routes")
 const bodyParser = require('body-parser');
 // const cors = require('cors')
 
@@ -20,6 +20,7 @@ app.use("/", getRouter)
 app.use("/", postRouter)
 app.use("/", patchRouter)
 app.use("/", deleteRouter)
+app.use("/", getFoodRouter)
 
 
 app.get("/", (req, res) => {
