@@ -3,6 +3,7 @@ const getRouter = express.Router()
 const postRouter = express.Router()
 const patchRouter = express.Router()
 const deleteRouter = express.Router()
+const getFoodRouter = express.Router()
 const Food = require("../models/food.model")
 const { get } = require('http')
 
@@ -36,10 +37,8 @@ postRouter.post('/post', async (req, res) => {
 
 patchRouter.patch('/patch/:foodId', async (req, res)=>{
     try {
-        const { foodId } = req.params; // Extract foodId from request parameters
-        const updatedFields = req.body; // Extract updated fields from request body
-
-        // Find the food item by its ID and update it with the new fields
+        const { foodId } = req.params; 
+        const updatedFields = req.body; 
         const updatedFood = await Food.findOneAndUpdate({ FoodID: foodId }, updatedFields, { new: true });
 
         if (!updatedFood) {
@@ -57,22 +56,33 @@ patchRouter.patch('/patch/:foodId', async (req, res)=>{
 
 deleteRouter.delete('/delete/:foodId', async (req, res)=>{
     try {
-        const { foodId } = req.params; // Extract foodId from request parameters
-        const deleteFields = req.body; // Extract updated fields from request body
-
-        // Find the food item by its ID and update it with the new fields
+        const { foodId } = req.params; 
+        const deleteFields = req.body; 
         const deleteFood = await Food.findOneAndDelete({ FoodID: foodId }, deleteFields, { new: true });
 
         if (!deleteFood) {
             return res.status(404).json({ error: 'Food not deleted' });
         }
-
         console.log("deleted", deleteFood);
         res.status(200).json(deleteFood);
     } catch (err) {
         console.error(err);
         return res.status(500).json({ error: 'Something went wrong' });
     }
+})
+
+getFoodRouter.get('/get/:foodId', async (req, res)=>{
+    try{
+        const{ foodId } = req.params
+        const food = await Food.findOne({ FoodID: foodId });
+        if (!food) {
+        return res.status(404).json({ error: 'Food not found' });
+        }
+        console.log(food)
+    }catch (err) {
+        console.error('Error fetching food data:', err);
+        res.status(500).json({ error: 'Something went wrong' });
+        }
 })
 
 
