@@ -26,40 +26,40 @@ export default function InsertData() {
 
     return (
         <>
-            <div>Insert Data</div>
+            <h2>Insert Data</h2>
             <div className="form-container">
-                <form onSubmit={handleSubmit}>
+                <form className='form' onSubmit={handleSubmit}>
                     <div className='div'>
-                        <label htmlFor="Name">Name:</label><br />
-                        <input type="text" id="Name" name="Name" onChange={(e) => setName(e.target.value)} /><br />
+                        <label htmlFor="FoodID">Food ID</label>
+                        <input type="text" id="FoodID" name="FoodID" onChange={(e) => setFoodID(e.target.value)} />
                     </div>
                     <div className='div'>
-                        <label htmlFor="Country">Country:</label><br />
-                        <input type="text" id="Country" name="Country" onChange={(e) => setCountry(e.target.value)} /><br />
+                        <label htmlFor="Name">Name</label>
+                        <input type="text" id="Name" name="Name" onChange={(e) => setName(e.target.value)} />
                     </div>
                     <div className='div'>
-                        <label htmlFor="Cuisine">Cuisine:</label><br />
-                        <input type="text" id="Cuisine" name="Cuisine" onChange={(e) => setCuisine(e.target.value)} /><br />
+                        <label htmlFor="Country">Country</label>
+                        <input type="text" id="Country" name="Country" onChange={(e) => setCountry(e.target.value)} />
                     </div>
                     <div className='div'>
-                        <label htmlFor="MainIngredients">Main Ingredients:</label><br />
-                        <input type="text" id="MainIngredients" name="MainIngredients" onChange={(e) => setMainIngredients(e.target.value)} /><br />
+                        <label htmlFor="Cuisine">Cuisine</label>
+                        <input type="text" id="Cuisine" name="Cuisine" onChange={(e) => setCuisine(e.target.value)} />
                     </div>
                     <div className='div'>
-                        <label htmlFor="City">City:</label><br />
-                        <input type="text" id="City" name="City" onChange={(e) => setCity(e.target.value)} /><br />
+                        <label htmlFor="MainIngredients">Main Ingredients</label>
+                        <input type="text" id="MainIngredients" name="MainIngredients" onChange={(e) => setMainIngredients(e.target.value)} />
                     </div>
                     <div className='div'>
-                        <label htmlFor="Taste">Taste:</label><br />
-                        <input type="text" id="Taste" name="Taste" onChange={(e) => setTaste(e.target.value)} /><br />
+                        <label htmlFor="City">City</label>
+                        <input type="text" id="City" name="City" onChange={(e) => setCity(e.target.value)} />
                     </div>
                     <div className='div'>
-                        <label htmlFor="Type">Type:</label><br />
-                        <input type="text" id="Type" name="Type" onChange={(e) => setType(e.target.value)} /><br />
+                        <label htmlFor="Taste">Taste</label>
+                        <input type="text" id="Taste" name="Taste" onChange={(e) => setTaste(e.target.value)} />
                     </div>
                     <div className='div'>
-                        <label htmlFor="FoodID">Food ID:</label><br />
-                        <input type="text" id="FoodID" name="FoodID" onChange={(e) => setFoodID(e.target.value)} /><br />
+                        <label htmlFor="Type">Type</label>
+                        <input type="text" id="Type" name="Type" onChange={(e) => setType(e.target.value)} />
                     </div>
                     <input type="submit" className='submit' value="Submit" />
                 </form>

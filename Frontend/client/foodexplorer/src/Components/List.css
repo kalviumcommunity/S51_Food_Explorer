@@ -9,7 +9,7 @@
 
 
 
-button{
+.button{
     margin-left: 900px;
     position: relative;
     bottom: 70px;
@@ -38,7 +38,7 @@ p {
     font-size: 28px;
 }
 
-button {
+.button {
     appearance: none;
     background-color: transparent;
     border: 1px solid #ccc;
@@ -48,4 +48,23 @@ button {
     font-size: inherit;
     padding: 8px 16px;
     text-align: center;
+    font-weight: bold;
+}
+
+.Updatebutton {
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid black;
+    border-radius: 4px;
+    color: black;
+    cursor: pointer;
+    font-size: inherit;
+    padding: 8px 16px;
+    text-align: center;
+    margin: 10px;
+    font-weight: bold;
+}
+
+p{
+    font-weight: 500;
 }
