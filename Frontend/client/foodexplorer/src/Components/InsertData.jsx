@@ -29,19 +29,19 @@ export default function InsertData() {
             <h2>Insert Data</h2>
             <div className="form-container">
             <form className='form' onSubmit={handleSubmit}>
-    <div className='div'>
-        <label htmlFor="FoodID">Food ID</label>
-        <input type="text" id="FoodID" name="FoodID" onChange={(e) => setFoodID(e.target.value.trim())} />
-    </div>
-    <div className='div'>
-        <label htmlFor="Name">Name</label>
-        <input type="text" id="Name" name="Name" onChange={(e) => setName(e.target.value.trim())} />
-    </div>
-    <div className='div'>
-        <label htmlFor="Country">Country</label>
-        <input type="text" id="Country" name="Country" onChange={(e) => setCountry(e.target.value.trim())} />
-    </div>
-    <div className='div'>
+                <div className='div'>
+                    <label htmlFor="FoodID">Food ID</label>
+                    <input type="text" id="FoodID" name="FoodID" onChange={(e) => setFoodID(e.target.value.trim())} />
+                </div>
+                <div className='div'>
+                    <label htmlFor="Name">Name</label>
+                    <input type="text" id="Name" name="Name" onChange={(e) => setName(e.target.value.trim())} />
+                </div>
+                <div className='div'>
+                    <label htmlFor="Country">Country</label>
+                    <input type="text" id="Country" name="Country" onChange={(e) => setCountry(e.target.value.trim())} />
+                </div>  
+                <div className='div'>
         <label htmlFor="Cuisine">Cuisine</label>
         <input type="text" id="Cuisine" name="Cuisine" onChange={(e) => setCuisine(e.target.value.trim())} />
     </div>
