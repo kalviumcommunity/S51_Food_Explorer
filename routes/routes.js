@@ -6,6 +6,7 @@ const deleteRouter = express.Router()
 const getFoodRouter = express.Router()
 const Food = require("../models/food.model")
 const { get } = require('http')
+const updateAndPostJoi = require('../validator')
 
 
 getRouter.get('/get', async(req, res)=>{
@@ -22,10 +23,16 @@ getRouter.get('/get', async(req, res)=>{
 postRouter.post('/post', async (req, res) => {
     try {
         console.log(req.body)
-        const { FoodID, Name, Cuisine, Country, City, MainIngredients, Type, Taste } = req.body; // Destructuring to extract Name and Cuisine from req.body
-        const newFood = await Food.create({FoodID, Name, Cuisine, Country, City, MainIngredients, Type, Taste }); // Creating a new Food instance with Name and Cuisine
-        console.log("new", newFood);
-        res.status(200).json(newFood);
+        const {error, value} = updateAndPostJoi(req.body)
+        if(error){
+            return res.status(400).json(error.details)
+        }
+        else{
+            const { FoodID, Name, Cuisine, Country, City, MainIngredients, Type, Taste } = req.body; // Destructuring to extract Name and Cuisine from req.body
+            const newFood = await Food.create({FoodID, Name, Cuisine, Country, City, MainIngredients, Type, Taste }); // Creating a new Food instance with Name and Cuisine
+            console.log("new", newFood);
+            res.status(200).json(newFood);
+        }
     } catch(err) {
         console.error(err);
         return res.status(500).send({
@@ -37,16 +44,19 @@ postRouter.post('/post', async (req, res) => {
 
 patchRouter.patch('/patch/:foodId', async (req, res)=>{
     try {
-        const { foodId } = req.params; 
-        const updatedFields = req.body; 
-        const updatedFood = await Food.findOneAndUpdate({ FoodID: foodId }, updatedFields, { new: true });
-
-        if (!updatedFood) {
-            return res.status(404).json({ error: 'Food not found' });
+        const {error, value} = updateAndPostJoi(req.body)
+        if(error){
+            return res.status(400).json(error.details)
         }
-
-        console.log("updated", updatedFood);
-        res.status(200).json(updatedFood);
+        else{
+            const { foodId } = req.params; 
+            const updatedFields = req.body; 
+            const updatedFood = await Food.findOneAndUpdate({ FoodID: foodId }, updatedFields, { new: true });
+            if (!updatedFood) 
+                return res.status(404).json({ error: 'Food not found' });
+                console.log("updated", updatedFood);
+                res.status(200).json(updatedFood);
+            }
     } catch (err) {
         console.error(err);
         return res.status(500).json({ error: 'Something went wrong' });
