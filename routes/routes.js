@@ -7,6 +7,7 @@ const getFoodRouter = express.Router()
 const Food = require("../models/food.model")
 const { get } = require('http')
 const updateAndPostJoi = require('../validator')
+const jwt = require('jsonwebtoken');
 
 
 getRouter.get('/get', async(req, res)=>{
@@ -109,6 +110,17 @@ getRouter.get("/logout", (req, res)=>{
     res.clearCookie('username')
     res.send('Logout successful')
 })
+
+postRouter.post('/auth', (req, res) => {
+    const { username, password } = req.body;
+    // JWT token
+    const token = jwt.sign({ username: username }, process.env.ACCESS_TOKEN);
+    // Set cookie
+    res.cookie('token', token);
+    // Send response with token
+    res.send({ token });
+});
+
 
 
 
