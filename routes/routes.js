@@ -29,8 +29,8 @@ postRouter.post('/post', async (req, res) => {
             return res.status(400).json(error.details)
         }
         else{
-            const { FoodID, Name, Cuisine, Country, City, MainIngredients, Type, Taste } = req.body; // Destructuring to extract Name and Cuisine from req.body
-            const newFood = await Food.create({FoodID, Name, Cuisine, Country, City, MainIngredients, Type, Taste }); // Creating a new Food instance with Name and Cuisine
+            const { FoodID, Name, Cuisine, Country, City, MainIngredients, Type, Taste, CreatedBy } = req.body; // Destructuring to extract Name and Cuisine from req.body
+            const newFood = await Food.create({FoodID, Name, Cuisine, Country, City, MainIngredients, Type, Taste, CreatedBy }); // Creating a new Food instance with Name and Cuisine
             console.log("new", newFood);
             res.status(200).json(newFood);
         }

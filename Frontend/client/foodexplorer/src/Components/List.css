@@ -68,3 +68,22 @@ p {
 p{
     font-weight: 500;
 }
+
+.filter{
+    display: flex;
+    margin-bottom: 50px;
+}
+
+#createdBy:focus{
+    outline: none;
+}
+
+#createdBy{
+    margin-left: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight:600;
+    padding: 5px;
+    height: 30px;
+    width: 125px;
+    border-radius: 5px;
+}
