@@ -14,6 +14,7 @@ export default function UpdateData() {
     const [type, setType] = useState('');
     const [taste, setTaste] = useState('');
     const [foodID, setFoodID] = useState('');
+    const [createdby, setcreatedby] = useState('');
 
     useEffect(() => {
         const fetchFoodData = async () => {
@@ -30,6 +31,8 @@ export default function UpdateData() {
                     setType(data.Type);
                     setTaste(data.Taste);
                     setFoodID(data.FoodID);
+                    setcreatedby(data.CreatedBy)
+
                 } else {
                     console.error('Failed to fetch food data');
                 }
@@ -53,7 +56,8 @@ export default function UpdateData() {
                 City: city,
                 Type: type,
                 Taste: taste,
-                FoodID: foodID
+                FoodID: foodID,
+                CreatedBy: createdby
             }, {
                 headers: {
                     'Content-Type': 'application/json'
@@ -76,6 +80,10 @@ export default function UpdateData() {
             <h2>Update Data</h2>
             <div className="form-container">
                 <form className='form' onSubmit={handleSubmit}>
+                    <div className='div'>
+                        <label htmlFor="FoodID">Food ID</label>
+                        <input type="text" id="FoodID" name="FoodID" value={foodID} onChange={(e) => setFoodID(e.target.value)} />
+                    </div>
                     <div className='div'>
                         <label htmlFor="Name">Name</label>
                         <input type="text" id="Name" name="Name" value={name} onChange={(e) => setName(e.target.value)} />
@@ -105,8 +113,8 @@ export default function UpdateData() {
                         <input type="text" id="Type" name="Type" value={type} onChange={(e) => setType(e.target.value)} />
                     </div>
                     <div className='div'>
-                        <label htmlFor="FoodID">Food ID</label>
-                        <input type="text" id="FoodID" name="FoodID" value={foodID} onChange={(e) => setFoodID(e.target.value)} />
+                        <label htmlFor="Type">Created By</label>
+                        <input type="text" id="CreatedBy" name="CreatedBy" onChange={(e) => setcreatedby(e.target.value)} />
                     </div>
                     <input type="submit" className='submit' value="Submit" />
                 </form>

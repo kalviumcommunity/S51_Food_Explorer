@@ -10,7 +10,8 @@ const postUpdateSchema = Joi.object({
     City: Joi.string().required(),
     MainIngredients: Joi.string().required(),
     Type: Joi.string().required(),
-    Taste: Joi.string().required()
+    Taste: Joi.string().required(),
+    CreatedBy: Joi.string().required()
 })
 
 const updateAndPostValidator = validator(postUpdateSchema)

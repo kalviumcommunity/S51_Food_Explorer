@@ -4,6 +4,7 @@ import './List.css'
 
 function List() {
     const [data, setData] = useState([]);
+    const [selectedCreator, setSelectedCreator] = useState('');
 
     useEffect(() => {
         fetchFood();
@@ -37,6 +38,13 @@ function List() {
         }
     };
 
+    const handleCreatorChange = (e) => {
+        setSelectedCreator(e.target.value);
+    };
+
+    const uniqueCreators = [...new Set(data.map(item => item.CreatedBy))];
+    const filteredData = selectedCreator ? data.filter(item => item.CreatedBy === selectedCreator) : data;
+
     return (
         <>
             <h1><i>FOOD EXPLORER</i></h1>
@@ -45,27 +53,35 @@ function List() {
             <div className="head">
                 <h1>Food Details</h1>
                 <Link to='/insertData' className="link"><button className="button">ADD</button></Link>
+                <div className="filter">
+                    <label htmlFor="createdBy">Filter by Creator:</label>
+                    <select id="createdBy" value={selectedCreator} onChange={handleCreatorChange}>
+                        <option value="">All</option>
+                        {uniqueCreators.map(option => (
+                            <option key={option} value={option}>{option}</option>
+                        ))}
+                    </select>
+                </div>
             </div>
             <div className="box">
-                {data.map((item) => {
-                    return (
-                        <div className='main' key={item.FoodID}>
-                            <p>Food ID : {item.FoodID}</p>
-                            <p>Name : {item.Name}</p>
-                            <p>Country : {item.Country}</p>
-                            <p>City : {item.City}</p>
-                            <p>Cuisine : {item.Cuisine}</p>
-                            <p>Main Ingredients : {item.MainIngredients}</p>
-                            <p>Type : {item.Type}</p>
-                            <p>Taste : {item.Taste}</p>
-                            <Link to={`/updateData/${item.FoodID}`}><button className="Updatebutton">UPDATE</button></Link>
-                            <button className="Updatebutton" onClick={(e) => handleDelete(item.FoodID)}>DELETE</button>
-                        </div>
-                    )
-                })}
+                {filteredData.map((item) => (
+                    <div className='main' key={item.FoodID}>
+                        <p>Food ID : {item.FoodID}</p>
+                        <p>Name : {item.Name}</p>
+                        <p>Country : {item.Country}</p>
+                        <p>City : {item.City}</p>
+                        <p>Cuisine : {item.Cuisine}</p>
+                        <p>Main Ingredients : {item.MainIngredients}</p>
+                        <p>Type : {item.Type}</p>
+                        <p>Taste : {item.Taste}</p>
+                        <p>Created By : {item.CreatedBy}</p>
+                        <Link to={`/updateData/${item.FoodID}`}><button className="Updatebutton">UPDATE</button></Link>
+                        <button className="Updatebutton" onClick={() => handleDelete(item.FoodID)}>DELETE</button>
+                    </div>
+                ))}
             </div>
         </>
-    )
+    );
 }
 
 export default List;

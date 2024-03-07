@@ -12,6 +12,7 @@ export default function InsertData() {
     const [City, setCity] = useState('');
     const [Type, setType] = useState('');
     const [Taste, setTaste] = useState('');
+    const [CreatedBy, setCreatedBy] = useState('');
     const navigate = useNavigate()
     
     const handleSubmit = (e) => {
@@ -42,28 +43,31 @@ export default function InsertData() {
                     <input type="text" id="Country" name="Country" onChange={(e) => setCountry(e.target.value.trim())} />
                 </div>  
                 <div className='div'>
-        <label htmlFor="Cuisine">Cuisine</label>
-        <input type="text" id="Cuisine" name="Cuisine" onChange={(e) => setCuisine(e.target.value.trim())} />
-    </div>
-    <div className='div'>
-        <label htmlFor="MainIngredients">Main Ingredients</label>
-        <input type="text" id="MainIngredients" name="MainIngredients" onChange={(e) => setMainIngredients(e.target.value.trim())} />
-    </div>
-    <div className='div'>
-        <label htmlFor="City">City</label>
-        <input type="text" id="City" name="City" onChange={(e) => setCity(e.target.value.trim())} />
-    </div>
-    <div className='div'>
-        <label htmlFor="Taste">Taste</label>
-        <input type="text" id="Taste" name="Taste" onChange={(e) => setTaste(e.target.value.trim())} />
-    </div>
-    <div className='div'>
-        <label htmlFor="Type">Type</label>
-        <input type="text" id="Type" name="Type" onChange={(e) => setType(e.target.value.trim())} />
-    </div>
-    <input type="submit" className='submit' value="Submit" />
-</form>
-
+                    <label htmlFor="Cuisine">Cuisine</label>
+                    <input type="text" id="Cuisine" name="Cuisine" onChange={(e) => setCuisine(e.target.value.trim())} />
+                </div>
+                <div className='div'>
+                    <label htmlFor="MainIngredients">Main Ingredients</label>
+                    <input type="text" id="MainIngredients" name="MainIngredients" onChange={(e) => setMainIngredients(e.target.value.trim())} />
+                </div>
+                <div className='div'>
+                    <label htmlFor="City">City</label>
+                    <input type="text" id="City" name="City" onChange={(e) => setCity(e.target.value.trim())} />
+                </div>
+                <div className='div'>
+                    <label htmlFor="Taste">Taste</label>
+                    <input type="text" id="Taste" name="Taste" onChange={(e) => setTaste(e.target.value.trim())} />
+                </div>
+                <div className='div'>
+                    <label htmlFor="Type">Type</label>
+                    <input type="text" id="Type" name="Type" onChange={(e) => setType(e.target.value.trim())} />
+                </div>
+                <div className='div'>
+                    <label htmlFor="Type">Created By</label>
+                    <input type="text" id="CreatedBy" name="CreatedBy" onChange={(e) => setCreatedBy(e.target.value.trim())} />
+                </div>
+                <input type="submit" className='submit' value="Submit" />
+            </form>
             </div>
         </>
     );
