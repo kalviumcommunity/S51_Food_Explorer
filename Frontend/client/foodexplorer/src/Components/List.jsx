@@ -5,20 +5,52 @@ import './List.css'
 function List() {
     const [data, setData] = useState([]);
     const [selectedCreator, setSelectedCreator] = useState('');
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [uniqueCreators, setUniqueCreators] = useState([]);
 
     useEffect(() => {
         fetchFood();
+        checkLoginStatus();
     }, []);
+
+    useEffect(() => {
+        extractUniqueCreators();
+    }, [data]);
 
     const fetchFood = async () => {
         try {
             const response = await fetch('https://foodexplorer-iqox.onrender.com/get');
             const data = await response.json();
             setData(data);
-            console.log(data);
         } catch (err) {
             console.log(err);
         }
+    };
+
+    const checkLoginStatus = () => {
+        const token = getCookie('token');
+        setIsLoggedIn(!!token);
+    };
+
+    const handleLogout = () => {
+        document.cookie = 'token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        setIsLoggedIn(false);
+        window.location.reload();
+    };
+
+    const getCookie = (name) => {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    };
+
+    const extractUniqueCreators = () => {
+        const uniqueCreators = [...new Set(data.map(item => item.CreatedBy))];
+        setUniqueCreators(uniqueCreators);
+    };
+
+    const handleCreatorChange = (e) => {
+        setSelectedCreator(e.target.value);
     };
 
     const handleDelete = async (foodID) => {
@@ -38,11 +70,6 @@ function List() {
         }
     };
 
-    const handleCreatorChange = (e) => {
-        setSelectedCreator(e.target.value);
-    };
-
-    const uniqueCreators = [...new Set(data.map(item => item.CreatedBy))];
     const filteredData = selectedCreator ? data.filter(item => item.CreatedBy === selectedCreator) : data;
 
     return (
@@ -52,7 +79,12 @@ function List() {
             <hr></hr>
             <div className="head">
                 <h1>Food Details</h1>
-                <Link to='/insertData' className="link"><button className="button">ADD</button></Link>
+                {isLoggedIn && <Link to='/insertData' className="link"><button className="button">ADD</button></Link>}
+                {isLoggedIn ? (
+                    <button className="button" onClick={handleLogout}>LOGOUT</button>
+                ) : (
+                    <Link to='/login' className="login"><button className="button">LOGIN</button></Link>
+                )}
                 <div className="filter">
                     <label htmlFor="createdBy">Filter by Creator:</label>
                     <select id="createdBy" value={selectedCreator} onChange={handleCreatorChange}>
@@ -75,13 +107,13 @@ function List() {
                         <p>Type : {item.Type}</p>
                         <p>Taste : {item.Taste}</p>
                         <p>Created By : {item.CreatedBy}</p>
-                        <Link to={`/updateData/${item.FoodID}`}><button className="Updatebutton">UPDATE</button></Link>
-                        <button className="Updatebutton" onClick={() => handleDelete(item.FoodID)}>DELETE</button>
+                        {isLoggedIn && <Link to={`/updateData/${item.FoodID}`}><button className="Updatebutton">UPDATE</button></Link>}
+                        {isLoggedIn && <button className="Updatebutton" onClick={() => handleDelete(item.FoodID)}>DELETE</button>}
                     </div>
                 ))}
             </div>
         </>
-    );
+    );    
 }
 
 export default List;

@@ -2,6 +2,8 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const Food = require("../models/food.model");
 const updateAndPostJoi = require('../validator');
+const User = require("../models/user.model")
+const bcrypt = require("bcrypt")
 
 const getRouter = express.Router();
 const postRouter = express.Router();
@@ -9,44 +11,28 @@ const patchRouter = express.Router();
 const deleteRouter = express.Router();
 const getFoodRouter = express.Router();
 
-// Predefined users
-const users = [
-    { username: 'user1', password: 'password1' },
-    { username: 'user2', password: 'password2' },
-    { username: 'user3', password: 'password3' }
-];
 
-// Login route for authentication
-postRouter.post("/login", (req, res) => {
+
+postRouter.post("/login", async (req, res) => {
     const { username, password } = req.body;
-    const user = users.find(u => u.username === username && u.password === password);
-    if (!user) {
-        return res.status(401).json({ error: 'Invalid username or password' });
+    try {
+        const user = await User.findOne({ username });
+        if (!user) {
+            return res.status(401).json({ error: 'Invalid username or password' });
+        }
+        const isPasswordValid =  bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
+            return res.status(401).json({ error: 'Invalid username or password' });
+        }
+        const token = jwt.sign({ username: user.username }, process.env.ACCESS_TOKEN);
+        res.cookie('token', token, { httpOnly: true });
+        res.json({ token, username: user.username });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Something went wrong' });
     }
-    const token = jwt.sign({ username: user.username }, process.env.ACCESS_TOKEN);
-    res.cookie('token', token);
-    res.json({ username: user.username });
 });
 
-// Middleware to verify token before accessing protected routes
-const verifyToken = (req, res, next) => {
-    const token = req.cookies.token;
-    if (!token) {
-        return res.status(401).json({ error: 'Unauthorized' });
-    }
-    jwt.verify(token, process.env.ACCESS_TOKEN, (err, decoded) => {
-        if (err) {
-            return res.status(403).json({ error: 'Invalid token' });
-        }
-        req.user = decoded;
-        next();
-    });
-};
-
-// Protect routes using middleware
-postRouter.use(verifyToken);
-patchRouter.use(verifyToken);
-deleteRouter.use(verifyToken);
 
 // CRUD routes
 getRouter.get('/get', async(req, res)=>{
