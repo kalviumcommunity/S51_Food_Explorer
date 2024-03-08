@@ -15,6 +15,8 @@ const getFoodRouter = express.Router();
 
 postRouter.post("/login", async (req, res) => {
     const { username, password } = req.body;
+    console.log("user", username, password)
+
     try {
         const user = await User.findOne({ username });
         if (!user) {
@@ -26,6 +28,7 @@ postRouter.post("/login", async (req, res) => {
         }
         const token = jwt.sign({ username: user.username }, process.env.ACCESS_TOKEN);
         res.cookie('token', token, { httpOnly: true });
+        console.log("token", token, user.username)
         res.json({ token, username: user.username });
     } catch (err) {
         console.error(err);
