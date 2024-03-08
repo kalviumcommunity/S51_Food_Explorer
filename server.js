@@ -5,7 +5,7 @@ const { Connect, isConnected } = require('./db');
 const cors = require('cors');
 const { getRouter, postRouter, patchRouter, deleteRouter, getFoodRouter } = require("./routes/routes");
 const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
+// const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 
 // Middleware
@@ -13,7 +13,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
-app.use(cookieParser());
 
 // Connect to MongoDB
 Connect();
