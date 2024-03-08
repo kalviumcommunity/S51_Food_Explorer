@@ -114,7 +114,7 @@ export default function UpdateData() {
                     </div>
                     <div className='div'>
                         <label htmlFor="Type">Created By</label>
-                        <input type="text" id="CreatedBy" name="CreatedBy" onChange={(e) => setcreatedby(e.target.value)} />
+                        <input type="text" id="CreatedBy" name="CreatedBy" value={createdby} onChange={(e) => setcreatedby(e.target.value)} />
                     </div>
                     <input type="submit" className='submit' value="Submit" />
                 </form>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import { hash } from 'hash-it'; // Import a hashing library
+import './Login.css'
 import axios from 'axios';
 
 function LoginPage() {
@@ -26,7 +26,7 @@ function LoginPage() {
                 'mode' : "no-cors",
                 username,
                 password
-             });
+            });
             if (response.status === 200) {
                 const { token } = response.data;
                 console.log(response.data);
@@ -45,18 +45,18 @@ function LoginPage() {
 
     return (
         <div className="login-container">
-            <h2>Login</h2>
+            <h2 className='h2'>Login</h2>
             {error && <p className="error-message">{error}</p>}
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label htmlFor="username">Username:</label>
-                    <input type="text" id="username" value={username} onChange={handleUsernameChange} required />
+                    <label className='label' htmlFor="username">Username:</label>
+                    <input type="text" className='inputText' id="username" value={username} onChange={handleUsernameChange} required />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="password">Password:</label>
-                    <input type="password" id="password" value={password} onChange={handlePasswordChange} required />
+                    <label className='label' htmlFor="password">Password:</label>
+                    <input type="password" id="password" className='inputpassword' value={password} onChange={handlePasswordChange} required />
                 </div>
-                <button type="submit">Login</button>
+                <button className='buttonsubmit' type="submit">Login</button>
             </form>
         </div>
     );

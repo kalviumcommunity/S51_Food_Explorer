@@ -81,9 +81,9 @@ function List() {
                 <h1>Food Details</h1>
                 {isLoggedIn && <Link to='/insertData' className="link"><button className="button">ADD</button></Link>}
                 {isLoggedIn ? (
-                    <button className="button" onClick={handleLogout}>LOGOUT</button>
+                    <button className="logout" onClick={handleLogout}>LOGOUT</button>
                 ) : (
-                    <Link to='/login' className="login"><button className="button">LOGIN</button></Link>
+                    <Link to='/login'><button className="login">LOGIN</button></Link>
                 )}
                 <div className="filter">
                     <label htmlFor="createdBy">Filter by Creator:</label>
