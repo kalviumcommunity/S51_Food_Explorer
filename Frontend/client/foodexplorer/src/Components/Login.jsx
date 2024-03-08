@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // import { hash } from 'hash-it'; // Import a hashing library
+import axios from 'axios';
 
 function LoginPage() {
     const [username, setUsername] = useState('');
@@ -19,22 +20,21 @@ function LoginPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('https://foodexplorer-iqox.onrender.com/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ username, password })
-            });
-            if (response.ok) {
-                const responseData = await response.json();
-                const { token } = responseData
-                console.log(responseData)
+            const header = new Headers({"Access-Control-Allow-Origin":"*", 'Content-Type' : '*'})
+            const response = await axios.post('https://foodexplorer-iqox.onrender.com/login',{
+                headers: header,
+                'mode' : "no-cors",
+                username,
+                password
+             });
+            if (response.status === 200) {
+                const { token } = response.data;
+                console.log(response.data);
                 document.cookie = `token=${token}; path=/;`;
                 navigate('/');
             } else {
-                const errorData = await response.json();
-                navigate('/')
+                const errorData = response.data;
+                navigate('/');
                 alert(errorData.error);
             }
         } catch (error) {
@@ -42,7 +42,6 @@ function LoginPage() {
             setError('Something went wrong. Please try again later.');
         }
     };
-    
 
     return (
         <div className="login-container">
