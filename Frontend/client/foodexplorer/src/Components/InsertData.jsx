@@ -17,7 +17,7 @@ export default function InsertData() {
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post("https://foodexplorer-iqox.onrender.com/post", { FoodID, Name, Country, City, Cuisine, MainIngredients, Type, Taste })
+        axios.post("https://foodexplorer-iqox.onrender.com/post", { FoodID, Name, Country, City, Cuisine, MainIngredients, Type, Taste, CreatedBy })
             .then((res)=>{
                 console.log(res)
                 navigate('/')
