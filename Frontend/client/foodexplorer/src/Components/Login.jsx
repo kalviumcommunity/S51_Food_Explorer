@@ -40,6 +40,8 @@ function LoginPage() {
         } catch (error) {
             console.error('Error logging in:', error);
             setError('Something went wrong. Please try again later.');
+            alert("Username or password is not correct , you are not allowed to perform some operations");
+            navigate('/');
         }
     };
 
